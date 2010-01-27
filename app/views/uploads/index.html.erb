@@ -10,6 +10,8 @@
 			<li><%= upload.name %> (<%= time_ago_in_words(upload.created_at) %>) – <%= link_to "Download", upload %> | <%= link_to "Delete", upload, :action => :delete, :method => :delete, :confirm => "Are you sure?" %></li>
 		<% end %>
 	</ul>
+	
+	<p><%= link_to "Upload another file", new_upload_path %></p>
 <% else %>
 	<p>No files on database. How about <%= link_to "upload one", new_upload_path %> now?</p>
 <% end %>

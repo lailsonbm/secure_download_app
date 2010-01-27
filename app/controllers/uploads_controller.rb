@@ -25,7 +25,9 @@ class UploadsController < ApplicationController
     
     upload.save
     
-    redirect_to :action => :index
+    flash[:notice] = "The file #{upload.name} was uploaded."
+    
+    redirect_to uploads_path
   end
 
   def show
