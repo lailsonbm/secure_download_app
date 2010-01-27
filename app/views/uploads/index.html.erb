@@ -1,11 +1,15 @@
 <h1>Uploads</h1>
 
+<% if flash[:notice] %>
+	<p><em><%= flash[:notice] %></em></p>
+<% end -%>
+
 <% unless @uploads.empty? %>
 	<ul id="uploads">
 		<% for upload in @uploads %>
-			<li><%= upload.name %> (<%= time_ago_in_words(upload.created_at) %>) – <%= link_to "Download", upload %></li>
+			<li><%= upload.name %> (<%= time_ago_in_words(upload.created_at) %>) – <%= link_to "Download", upload %> | <%= link_to "Delete", upload, :action => :delete, :method => :delete, :confirm => "Are you sure?" %></li>
 		<% end %>
 	</ul>
 <% else %>
-	<p>No files were sent yet. How about <%= link_to "upload one", new_upload_path %> now?</p>
+	<p>No files on database. How about <%= link_to "upload one", new_upload_path %> now?</p>
 <% end %>

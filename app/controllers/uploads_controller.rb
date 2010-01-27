@@ -1,5 +1,5 @@
 class UploadsController < ApplicationController
-  WAITING_TIME = 8
+  WAIT_TIME = 4
   
   def index
     if request.path == "/"
@@ -40,7 +40,7 @@ class UploadsController < ApplicationController
     FileUtils.ln_s(upload.path, download_path)
     
     Thread.new do
-      sleep WAITING_TIME
+      sleep WAIT_TIME
       FileUtils.remove_dir dir_path
       puts "Removed directory #{dir_path}"
     end
@@ -48,7 +48,13 @@ class UploadsController < ApplicationController
     redirect_to File.join("/", relative_download_path)
   end
 
-  def delete
+  def destroy
+    upload = Upload.find(params[:id])
+    upload.destroy
+    
+    flash[:notice] = "The file #{upload.name} was deleted."
+    
+    redirect_to uploads_path
   end
   
 end
