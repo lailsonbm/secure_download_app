@@ -1,4 +1,6 @@
 class UploadsController < ApplicationController
+  WAITING_TIME = 8
+  
   def index
     if request.path == "/"
       redirect_to uploads_path
@@ -27,7 +29,23 @@ class UploadsController < ApplicationController
   end
 
   def show
+    upload = Upload.find(params[:id])
     
+    relative_dir_path = File.join("uploads", UUIDTools::UUID.random_create.to_s)
+    dir_path = File.join(RAILS_ROOT, "public", relative_dir_path)
+    FileUtils.mkdir(dir_path)
+    
+    relative_download_path = File.join(relative_dir_path, upload.name)
+    download_path = File.join(RAILS_ROOT, "public", relative_download_path)
+    FileUtils.ln_s(upload.path, download_path)
+    
+    Thread.new do
+      sleep WAITING_TIME
+      FileUtils.remove_dir dir_path
+      puts "Removed directory #{dir_path}"
+    end
+    
+    redirect_to File.join("/", relative_download_path)
   end
 
   def delete
