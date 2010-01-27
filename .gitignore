@@ -2,5 +2,5 @@ log/*.log
 tmp/**/*
 doc/api
 doc/app
-db/files/*
+db/uploads/*
 db/*.sqlite3

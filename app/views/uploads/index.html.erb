@@ -1,0 +1,11 @@
+<h1>Uploads</h1>
+
+<% unless @uploads.empty? %>
+	<ul id="uploads">
+		<% for upload in @uploads %>
+			<li><%= upload.name %> (<%= time_ago_in_words(upload.created_at) %>) – <%= link_to "Download", upload %></li>
+		<% end %>
+	</ul>
+<% else %>
+	<p>No files were sent yet. How about <%= link_to "upload one", new_upload_path %> now?</p>
+<% end %>
