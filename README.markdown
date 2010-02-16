@@ -6,8 +6,9 @@ This is a Rails 2.3.5 demo application that shows how to build a (semi) secure a
 This setup is also robust because the redirect is managed by the web server (e.g. Apache) insted of blocking the Ruby process until the file is transmitted. This way, the Ruby request lasts only the time required to find the file and create the URL and the download is managed directly by the web sever.
 
 #How to Use
-1. Clone the repository.
+1. Clone the repository and go to project directory.
        git clone git://github.com/lailsonbm/secure_download_app.git
+       cd secure_download_app
 
 2. Run the database migration (the app uses SQLite3) and start the Rails server.
        rake db:migrate
