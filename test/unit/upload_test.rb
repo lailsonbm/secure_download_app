@@ -2,7 +2,10 @@ require 'test_helper'
 
 class UploadTest < ActiveSupport::TestCase
   # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test "validation of name" do
+    upload = Upload.new
+    assert !upload.save
   end
+  
+  
 end
